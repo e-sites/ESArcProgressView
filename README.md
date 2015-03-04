@@ -44,7 +44,7 @@ pv = [[ESArcProgressView alloc] init];
 ```
 
 ```objc
-// To extra the UIImage:
+// To extract the UIImage:
 UIImage *image = [v generateImage];
 ```
 
@@ -59,6 +59,6 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 ```
 
 ```objc
-// To extra the UIImage:
+// To extract the UIImage:
 UIImage *image = [pv generateImage];
 ```
