@@ -43,6 +43,11 @@ pv = [[ESArcProgressView alloc] init];
 [v addArcProgressView:pv];
 ```
 
+```objc
+// To extra the UIImage:
+UIImage *image = [v generateImage];
+```
+
 ### ESArcProgressView
 ```#import <ESArcProgressView.h>```
 
@@ -53,23 +58,7 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 [self.view addSubview:pv];
 ```
 
-### Localization
-- `deleteText`: The text in the delete button (default = "Delete")
-- `cancelText`: The text in the cancel button (default = "Cancel")
-- `headerText`: The top text that asks the user to enter a passcode (default = "Enter Passcode")
-
-### Appearance
-- `showCancelButton`: Should the cancel button appear when no digits are entered (Default = NO)
-- `showAlphabet`: Should the entry buttons contain alphabet characters. (Default = NO)
-- `backgroundView`: Should the entry buttons contain alphabet characters. (Default = Blue/grayish background)
-- `backgroundBlurRadius`: The blur radius given to the background view (Default = 15)
-- `backgroundColor`: The background color that overlays the backgroundView (Default = 70% alpha black)
-
-### Validation
-- `numberOfDigits`: The total number of digits that should be entered. (Default = 4)
-- `attempts`: The total number of attempts (readonly)
-- `code`: The code that is entered. (readonly)
-- `vibrate`: Should the device vibrate when an incorrect entry is given (Default = YES)
-
-### General
-- `delegate`
+```objc
+// To extra the UIImage:
+UIImage *image = [pv generateImage];
+```
