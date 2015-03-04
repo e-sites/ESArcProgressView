@@ -11,7 +11,6 @@
 
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
-    BOOL _removing;
 }
 @synthesize color=_color,showShadow=_showShadow,showCenterDot=_showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor;
 
