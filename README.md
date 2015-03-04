@@ -5,7 +5,7 @@
 A progress view to be used within Apple Watch projects
 
 ## Examples
-![](https://raw.githubusercontent.com/e-sites/ESArcProgressView/master/Assets/example.png)
+![](https://raw.githubusercontent.com/e-sites/ESArcProgressView/master/Assets/example1.png)
 
 
 ## Installation
