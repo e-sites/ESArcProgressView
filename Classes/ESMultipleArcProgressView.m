@@ -46,6 +46,15 @@
     _margin = 1;
 }
 
+#pragma mark - Layout
+// ____________________________________________________________________________________________________________________
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self _updateProgressViews];
+}
+
 #pragma mark - Adding progress views
 // ____________________________________________________________________________________________________________________
 
@@ -83,27 +92,48 @@
     }
     
     [progressView setFrame:rect];
-    [progressView setNeedsDisplay];
-    
+    [progressView setNeedsDisplay];    
 }
 
 - (void)removeArcProgressView:(ESArcProgressView *)progressView
 {
     [progressView setMultipleArcProgressView:nil];
     [progressView removeFromSuperview];
-    [self _updateProgressViews];
 }
 
 - (void)_updateProgressViews
 {
     _previousArcProgressView = nil;
-    NSArray *progressViews = [[self.subviews reverseObjectEnumerator] allObjects];
+    NSArray *progressViews = self.subviews;
     for (UIView *v in progressViews) {
         ESArcProgressView *pv = (ESArcProgressView *)v;
         [self _placeProgressView:pv];
         [self bringSubviewToFront:pv];
         _previousArcProgressView = pv;
     }
+}
+
+#pragma mark - Overriding
+// ____________________________________________________________________________________________________________________
+
+- (void)addSubview:(UIView *)view
+{
+    NSAssert(NO, @"%s should not be called", __PRETTY_FUNCTION__);
+}
+
+- (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview
+{
+    NSAssert(NO, @"%s should not be called", __PRETTY_FUNCTION__);    
+}
+
+- (void)insertSubview:(UIView *)view atIndex:(NSInteger)index
+{
+    NSAssert(NO, @"%s should not be called", __PRETTY_FUNCTION__);
+}
+
+- (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview
+{
+    NSAssert(NO, @"%s should not be called", __PRETTY_FUNCTION__);
 }
 
 @end
