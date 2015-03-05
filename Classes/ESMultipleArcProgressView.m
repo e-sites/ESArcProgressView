@@ -52,7 +52,13 @@
 - (void)addArcProgressView:(ESArcProgressView *)progressView
 {
     NSAssert([progressView isKindOfClass:[ESArcProgressView class]], @"view <%@:%p> is not type of class ESArcProgressView", NSStringFromClass(progressView.class), progressView);
-    
+    CGFloat diameterLeft = self.frame.size.width / 2;
+    if (_previousArcProgressView != nil) {
+        diameterLeft = _previousArcProgressView.frame.size.width - (_previousArcProgressView.lineWidth * 2);
+        diameterLeft -= self.margin * 2;
+    }
+    NSAssert(diameterLeft >= progressView.lineWidth * 2, @"There is not enough room to place the <%@:%p> with lineWidth %.2f, maximum lineWidth: %.2f", NSStringFromClass(progressView.class), progressView, progressView.lineWidth, diameterLeft / 2);
+             
     [self _placeProgressView:progressView];
     [progressView setMultipleArcProgressView:self];
     [super addSubview:progressView];

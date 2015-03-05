@@ -12,7 +12,7 @@
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
 }
-@synthesize color=_color,showShadow=_showShadow,showCenterDot=_showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor;
+@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -42,7 +42,7 @@
 {
     [self setOpaque:NO];
     _showShadow = YES;
-    _showCenterDot = YES;
+    _centerDotStyle = ESArcProgressCenterDotStyleBeginAndEnd;
     _lineWidth = 20;
     _color = [UIColor greenColor];
     _dotColor = [UIColor whiteColor];
@@ -75,12 +75,6 @@
     [self setNeedsDisplay];
 }
 
-- (void)setShowCenterDot:(BOOL)aShowCenterDot
-{
-    _showCenterDot = aShowCenterDot;
-    [self setNeedsDisplay];
-}
-
 - (void)setProgress:(CGFloat)aProgress
 {
     _percentage = fminf(1.0f, fmaxf(0.0f, aProgress));
@@ -89,7 +83,13 @@
 
 - (void)setLineWidth:(CGFloat)aLineWidth
 {
-    _lineWidth = aLineWidth;
+    _lineWidth = fmaxf(1, aLineWidth);
+    [self setNeedsDisplay];
+}
+
+- (void)setCenterDotStyle:(ESArcProgressCenterDotStyle)aCenterDotStyle
+{
+    _centerDotStyle = aCenterDotStyle;
     [self setNeedsDisplay];
 }
 
@@ -121,7 +121,7 @@
     
     const CGFloat perc = self.progress;
     const CGFloat lineRadius = self.lineWidth / 2;
-    const CGFloat midDotRadius = lineRadius * 0.3;
+    const CGFloat midDotRadius = fmaxf(1.0f, lineRadius * 0.3);
     const UIColor *color = self.color;
     
     // ------------------------------------------------
@@ -168,34 +168,25 @@
     CGContextStrokePath(ctx);
     
     // Draw white begin / end dots
-    if (perc == 1 || !self.showCenterDot) {
+    if (perc == 1 || self.centerDotStyle == ESArcProgressCenterDotStyleNone) {
         return;
     }
     
     CGContextSetShadowWithColor(ctx, CGSizeZero, 0, nil);
     CGContextSetLineWidth(ctx, 0);
     CGContextSetFillColorWithColor(ctx, self.dotColor.CGColor);
-    CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
-    CGFloat w = abs(sinf(delta) * innerRadius);
-    CGFloat h = abs(cosf(delta) * innerRadius);
-    CGFloat x = center.x + w;
-    CGFloat y = (center.y - h);
     
-    // Left-top quarter of circle (270 > 360 °)
-    if (perc > 0.75) {
-        x = center.x - w;
-        
-        // Left-bottom quarter of circle (180 > 270 °)
-    } else if (perc > 0.5) {
-        x = center.x - w;
-        y = center.y + h;
-        
-        // Right-bottom quarter of circle (90 > 180 °)
-    } else if (perc > 0.25) {
-        y = center.y + h;
+    if (self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleBegin) {
+        CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
     }
-    CGContextAddEllipseInRect(ctx, CGRectMake(x - midDotRadius, y - midDotRadius, midDotRadius * 2, midDotRadius * 2));
     
+    if (self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) {
+        CGFloat w = sinf(delta) * innerRadius;
+        CGFloat h = cosf(delta) * innerRadius;
+        CGFloat x = center.x + w;
+        CGFloat y = center.y - h;
+        CGContextAddEllipseInRect(ctx, CGRectMake(x - midDotRadius, y - midDotRadius, midDotRadius * 2, midDotRadius * 2));
+    }
     CGContextFillPath(ctx);
 }
 @end

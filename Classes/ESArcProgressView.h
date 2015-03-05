@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class ESMultipleArcProgressView;
+
+typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
+    ESArcProgressCenterDotStyleNone = 0,
+    ESArcProgressCenterDotStyleBegin,
+    ESArcProgressCenterDotStyleEnd,
+    ESArcProgressCenterDotStyleBeginAndEnd
+};
+
 @interface ESArcProgressView : UIView
 
 /**
@@ -70,12 +78,24 @@
  *	@author Bas van Kuijck <bas@e-sites.nl>
  *
  *	Should the progress view show a small center dot
+ *  @deprecated Use [ESArcProgressView centerDotStyle] instead
  *  @note Default = YES
  *
  *	@since 1.0
  *  @date 04/03/2015
  */
-@property (nonatomic, readwrite, getter=shouldShowCenterDot) BOOL showCenterDot;
+@property (nonatomic, readwrite, getter=shouldShowCenterDot) BOOL showCenterDot __deprecated;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	What center dot style should be used
+ *  @note Default = ESArcProgressCenterDotStyleBeginAndEnd
+ *
+ *	@since 1.1
+ *  @date 05/03/2015
+ */
+@property (nonatomic, readwrite) ESArcProgressCenterDotStyle centerDotStyle;
 
 /**
  *	@author Bas van Kuijck <bas@e-sites.nl>
