@@ -88,6 +88,17 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
 /**
  *	@author Bas van Kuijck <bas@e-sites.nl>
  *
+ *	Should a small line fragment be visible when the progress is 0.0
+ *  @note Default: NO
+ * 
+ *	@since 1.3
+ *  @date 06/03/2015
+ */
+@property (nonatomic, readwrite, getter=shouldShowZeroProgress) BOOL showZeroProgress;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
  *	Should the progress view show a small center dot
  *  @deprecated Use [ESArcProgressView centerDotStyle] instead
  *  @note Default = YES

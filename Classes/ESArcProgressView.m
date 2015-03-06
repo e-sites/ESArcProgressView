@@ -12,7 +12,7 @@
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
 }
-@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text;
+@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text,showZeroProgress=_showZeroProgress;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -105,6 +105,12 @@
     [self setNeedsDisplay];
 }
 
+- (void)setShowZeroProgress:(BOOL)aShowZeroProgress
+{
+    _showZeroProgress = aShowZeroProgress;
+    [self setNeedsDisplay];
+}
+
 #pragma mark - UIView
 // ____________________________________________________________________________________________________________________
 
@@ -125,7 +131,7 @@
     // ------------------------------------------------
     // Configuration values
     
-    const CGFloat perc = self.progress;
+    const CGFloat perc = fmaxf(self.shouldShowZeroProgress ? 0.000001 : 0, self.progress);
     const CGFloat lineRadius = self.lineWidth / 2;
     const CGFloat midDotRadius = fmaxf(1.0f, lineRadius * 0.3);
     
@@ -149,31 +155,30 @@
     CGPathAddRelativeArc(path, NULL, center.x, center.y, innerRadius, -(M_PI / 2), M_PI * 2);
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
-    if (perc == 0) {
-        return;
+    if (perc > 0) {
+        
+        CGContextSaveGState(ctx);
+        // Draw mask
+        path = CGPathCreateMutable();
+        CGPathAddEllipseInRect(path, nil, rect);
+        CGPathAddEllipseInRect(path, nil, CGRectMake(lineRadius * 2, lineRadius * 2, (innerRadius - lineRadius) * 2, (innerRadius - lineRadius) * 2));
+        CGContextAddPath(ctx, path);
+        CGContextClosePath(ctx);
+        CGContextEOClip(ctx);
+        
+        // Shadow
+        if (self.shouldShowShadow) {
+            CGContextSetShadowWithColor(ctx, CGSizeZero, lineRadius * 1.5f, [UIColor colorWithWhite:0 alpha:.75].CGColor);
+        }
+        
+        // Draw foreground
+        path = CGPathCreateMutable();
+        CGContextSetStrokeColorWithColor(ctx, self.color.CGColor);
+        CGPathAddRelativeArc(path, NULL, center.x, center.y, innerRadius, -(M_PI / 2), delta);
+        CGContextAddPath(ctx, path);
+        CGContextStrokePath(ctx);
+        CGContextRestoreGState(ctx);
     }
-    
-    CGContextSaveGState(ctx);
-    // Draw mask
-    path = CGPathCreateMutable();
-    CGPathAddEllipseInRect(path, nil, rect);
-    CGPathAddEllipseInRect(path, nil, CGRectMake(lineRadius * 2, lineRadius * 2, (innerRadius - lineRadius) * 2, (innerRadius - lineRadius) * 2));
-    CGContextAddPath(ctx, path);
-    CGContextClosePath(ctx);
-    CGContextEOClip(ctx);
-    
-    // Shadow
-    if (self.shouldShowShadow) {
-        CGContextSetShadowWithColor(ctx, CGSizeZero, lineRadius * 1.5f, [UIColor colorWithWhite:0 alpha:.75].CGColor);
-    }
-    
-    // Draw foreground
-    path = CGPathCreateMutable();
-    CGContextSetStrokeColorWithColor(ctx, self.color.CGColor);
-    CGPathAddRelativeArc(path, NULL, center.x, center.y, innerRadius, -(M_PI / 2), delta);
-    CGContextAddPath(ctx, path);
-    CGContextStrokePath(ctx);
-    CGContextRestoreGState(ctx);
     
     if (self.text.length > 0) {
         NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:self.text];
@@ -204,11 +209,11 @@
     CGContextSetLineWidth(ctx, 0);
     CGContextSetFillColorWithColor(ctx, self.dotColor.CGColor);
     
-    if (self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleBegin) {
+    if ((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleBegin) && perc > 0) {
         CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
     }
     
-    if ((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd && perc < 1.0f) || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) {
+    if (((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd && self.progress < 1.0f) || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) && self.progress > 0) {
         CGFloat w = sinf(delta) * innerRadius;
         CGFloat h = cosf(delta) * innerRadius;
         CGFloat x = center.x + w;

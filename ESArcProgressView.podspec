@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ESArcProgressView"
-  s.version      = "1.2"
+  s.version      = "1.3"
   s.author       = { "bvkuijck" => "Bas van Kuijck <bas@e-sites.nl>" }
   s.license 	   = { :type => "MIT", :file => "LICENSE" }
   s.summary      = "A progress view to be used within Apple Watch projects."

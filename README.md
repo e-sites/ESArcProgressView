@@ -76,11 +76,12 @@ UIImage *image = [pv generateImage];
 | `backgroundColor`	| UIColor | The background color of the line | Default = 50% transparent of color
 | `dotColor	`	| UIColor | The color of the center dot at the beginning / end of the line | White    
 | `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20       
+| `showZeroProgress`	| BOOL | Should a small line fragment be visible when the progress is 0.0 | NO
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
 | `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
 | `progress`		| CGFloat | The progress in percentage (from 0.0 - 1.0) | 0.0
-| `text`			| NSString | Show a text label next to the progress view | `nil`
-| `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | `nil`
+| `text`			| NSString | Show a text label next to the progress view | nil
+| `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | nil
 
 ### ESArcProgressCenterDotStyle
 ```objc
