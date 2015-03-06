@@ -74,7 +74,7 @@ UIImage *image = [pv generateImage];
 | `dotColor	`	| UIColor | The color of the center dot at the beginning / end of the line | White    
 | `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20       
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
-| `centerDotStyle`	| ESArcProgress CenterDotStyle | Center dot style placement | ESArcProgressCenterDotStyleBeginAndEnd
+| `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
 
 ### ESArcProgressCenterDotStyle
 ```objc
