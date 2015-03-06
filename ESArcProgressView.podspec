@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   s.name         = "ESArcProgressView"
   s.version      = "1.1"
-  s.author       = { "bvkuijck" => "bas@e-sites.nl" }
+  s.author       = { "bvkuijck" => "Bas van Kuijck <bas@e-sites.nl>" }
   s.license 	   = { :type => "MIT", :file => "LICENSE" }
   s.summary      = "A progress view to be used within Apple Watch projects."
   s.source       = { :git => "https://github.com/e-sites/ESArcProgressView.git", :tag => s.version.to_s   }

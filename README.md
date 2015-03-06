@@ -29,16 +29,19 @@ ESMultipleArcProgressView *v = [[ESMultipleArcProgressView alloc] initWithFrame:
     
 ESArcProgressView *pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.5];
+[pv setText:@"RUN"];
 [pv setColor:[UIColor orangeColor]];
 [v addArcProgressView:pv];
     
 pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.65];
+[pv setText:@"WALK"];
 [pv setColor:[UIColor greenColor]];
 [v addArcProgressView:pv];
     
 pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.8];
+[pv setText:@"REST"];
 [pv setColor:[UIColor redColor]];
 [v addArcProgressView:pv];
 ```
@@ -76,7 +79,8 @@ UIImage *image = [pv generateImage];
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
 | `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
 | `progress`		| CGFloat | The progress in percentage (from 0.0 - 1.0) | 0.0
-| `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | nil
+| `text`			| NSString | Show a text label next to the progress view | `nil`
+| `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | `nil`
 
 ### ESArcProgressCenterDotStyle
 ```objc

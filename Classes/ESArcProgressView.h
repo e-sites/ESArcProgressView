@@ -77,6 +77,17 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
 /**
  *	@author Bas van Kuijck <bas@e-sites.nl>
  *
+ *	The label to show in the progress view
+ *  @note Default = nil
+ *
+ *	@since 1.2
+ *  @date 06/03/2015
+ */
+@property (nonatomic, copy) NSString *text;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
  *	Should the progress view show a small center dot
  *  @deprecated Use [ESArcProgressView centerDotStyle] instead
  *  @note Default = YES

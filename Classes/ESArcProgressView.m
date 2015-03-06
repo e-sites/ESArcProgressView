@@ -12,7 +12,7 @@
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
 }
-@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle;
+@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -99,6 +99,12 @@
     [self setNeedsDisplay];
 }
 
+- (void)setText:(NSString *)aText
+{
+    _text = [aText copy];
+    [self setNeedsDisplay];
+}
+
 #pragma mark - UIView
 // ____________________________________________________________________________________________________________________
 
@@ -122,7 +128,6 @@
     const CGFloat perc = self.progress;
     const CGFloat lineRadius = self.lineWidth / 2;
     const CGFloat midDotRadius = fmaxf(1.0f, lineRadius * 0.3);
-    const UIColor *color = self.color;
     
     // ------------------------------------------------
     
@@ -137,7 +142,7 @@
     // Draw background
     UIColor *bgColor = _customBackgroundColor;
     if (bgColor == nil) {
-        bgColor = [color colorWithAlphaComponent:.5];
+        bgColor = [self.color colorWithAlphaComponent:.5];
     }
     CGContextSetStrokeColorWithColor(ctx, bgColor.CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
@@ -148,11 +153,13 @@
         return;
     }
     
+    CGContextSaveGState(ctx);
     // Draw mask
     path = CGPathCreateMutable();
     CGPathAddEllipseInRect(path, nil, rect);
     CGPathAddEllipseInRect(path, nil, CGRectMake(lineRadius * 2, lineRadius * 2, (innerRadius - lineRadius) * 2, (innerRadius - lineRadius) * 2));
     CGContextAddPath(ctx, path);
+    CGContextClosePath(ctx);
     CGContextEOClip(ctx);
     
     // Shadow
@@ -162,13 +169,34 @@
     
     // Draw foreground
     path = CGPathCreateMutable();
-    CGContextSetStrokeColorWithColor(ctx, color.CGColor);
+    CGContextSetStrokeColorWithColor(ctx, self.color.CGColor);
     CGPathAddRelativeArc(path, NULL, center.x, center.y, innerRadius, -(M_PI / 2), delta);
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
+    CGContextRestoreGState(ctx);
+    
+    if (self.text.length > 0) {
+        NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:self.text];
+        [attstr beginEditing];
+        NSShadow *shadow = [[NSShadow alloc] init];
+        [shadow setShadowBlurRadius:0];
+        [shadow setShadowColor:[UIColor blackColor]];
+        [shadow setShadowOffset:CGSizeMake(1, 1)];
+        
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        [paragraph setAlignment:NSTextAlignmentRight];
+        [attstr addAttributes:@{
+                                NSFontAttributeName: [UIFont boldSystemFontOfSize:self.lineWidth / 1.2f],
+                                NSShadowAttributeName: shadow,
+                                NSParagraphStyleAttributeName: paragraph,
+                                NSForegroundColorAttributeName: self.color
+                                } range:NSMakeRange(0, self.text.length)];
+        [attstr endEditing];
+        [attstr drawInRect:CGRectMake(0, 0, center.x - 15, self.lineWidth)];
+    }
     
     // Draw white begin / end dots
-    if (perc == 1 || self.centerDotStyle == ESArcProgressCenterDotStyleNone) {
+    if (self.centerDotStyle == ESArcProgressCenterDotStyleNone) {
         return;
     }
     
@@ -180,7 +208,7 @@
         CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
     }
     
-    if (self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) {
+    if ((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd && perc < 1.0f) || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) {
         CGFloat w = sinf(delta) * innerRadius;
         CGFloat h = cosf(delta) * innerRadius;
         CGFloat x = center.x + w;
