@@ -75,6 +75,8 @@ UIImage *image = [pv generateImage];
 | `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20       
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
 | `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
+| `progress`		| CGFloat | The progress in percentage (from 0.0 - 1.0) | 0.0
+| `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | nil
 
 ### ESArcProgressCenterDotStyle
 ```objc
@@ -85,6 +87,13 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
     ESArcProgressCenterDotStyleBeginAndEnd
 };
 ```
+
+### Methods
+
+------------
+
+#### `generateImage`
+This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view
 
 ## ESMultipleArcProgressView
 
@@ -116,3 +125,8 @@ Remove a particual `ESArcProgressView` from the view stack. This method will rep
 | Parameter 	| Type  | Description
 |-------	|------ |----------
 | `progressView`		| ESArcProgressView | The ESArcProgressView to be removed
+
+-----------
+
+#### `generateImage`
+This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view
