@@ -62,3 +62,57 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 // To extract the UIImage:
 UIImage *image = [pv generateImage];
 ```
+
+## ESArcProgressView
+
+### Properties
+
+| Property 	| Type  | Description  | Default value
+|-------	|------ |----------    | -------
+| `color`		| UIColor | The color of the line | Green     
+| `backgroundColor`	| UIColor | The background color of the line | Default = 50% transparent of color
+| `dotColor	`	| UIColor | The color of the center dot at the beginning / end of the line | White    
+| `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20       
+| `showShadow`	| BOOL | Should the line have a drop shadow | YES
+| `centerDotStyle`	| ESArcProgress CenterDotStyle | Center dot style placement | ESArcProgressCenterDotStyleBeginAndEnd
+
+### ESArcProgressCenterDotStyle
+```objc
+typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
+    ESArcProgressCenterDotStyleNone = 0,
+    ESArcProgressCenterDotStyleBegin,
+    ESArcProgressCenterDotStyleEnd,
+    ESArcProgressCenterDotStyleBeginAndEnd
+};
+```
+
+## ESMultipleArcProgressView
+
+### Properties
+
+| Property 	| Type  | Description  | Default value
+|-------	|------ |----------    | -------
+| `margin`		| CGFloat | The space between the progress views | 1.0
+
+
+### Methods
+
+------------
+
+#### `addArcProgressView:`
+
+Adds a `ESArcProgressView` to the view. Each `ESArcProgressView` will be inserted inside the previous `ESArcProgressView`.
+
+| Parameter 	| Type  | Description
+|-------	|------ |----------
+| `progressView`		| ESArcProgressView | The ESArcProgressView to add
+
+------------
+
+#### `removeArcProgressView:`
+
+Remove a particual `ESArcProgressView` from the view stack. This method will reposition the remaining progress views accordingly.
+
+| Parameter 	| Type  | Description
+|-------	|------ |----------
+| `progressView`		| ESArcProgressView | The ESArcProgressView to be removed
