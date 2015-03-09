@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/e-sites/ESArcProgressView.git", :tag => s.version.to_s   }
   s.homepage     = "https://github.com/e-sites/ESArcProgressView"
   s.source_files = "Classes/*.{h,m}"
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '7.0'
   s.frameworks = 'QuartzCore'
   s.requires_arc = true
 end
