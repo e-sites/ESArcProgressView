@@ -125,7 +125,7 @@ Adds a `ESArcProgressView` to the view. Each `ESArcProgressView` will be inserte
 
 #### `removeArcProgressView:`
 
-Remove a particual `ESArcProgressView` from the view stack. This method will reposition the remaining progress views accordingly.
+Remove a particular `ESArcProgressView` from the view stack. This method will reposition the remaining progress views accordingly.
 
 | Parameter 	| Type  | Description
 |-------	|------ |----------
