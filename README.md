@@ -8,6 +8,7 @@ A progress view to be used within Apple Watch projects
 
 ## Examples
 ![](https://raw.githubusercontent.com/e-sites/ESArcProgressView/master/Assets/example1.png)
+![](https://raw.githubusercontent.com/e-sites/ESArcProgressView/master/Assets/applewatch1.png)
 
 
 ## Installation
