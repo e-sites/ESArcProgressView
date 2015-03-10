@@ -13,6 +13,7 @@
 		DF444DA21AAEFF7600BB2721 /* ESArcProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF444D9F1AAEFF7600BB2721 /* ESArcProgressView.m */; };
 		DF444DA31AAEFF7600BB2721 /* ESMultipleArcProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF444DA01AAEFF7600BB2721 /* ESMultipleArcProgressView.h */; };
 		DF444DA41AAEFF7600BB2721 /* ESMultipleArcProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF444DA11AAEFF7600BB2721 /* ESMultipleArcProgressView.m */; };
+		DF444DA81AAF08EC00BB2721 /* ESArcProgressView.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF444D831AAEFF3900BB2721 /* ESArcProgressView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +25,19 @@
 			remoteInfo = ESArcProgressView;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DF444DA71AAF08E000BB2721 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DF444DA81AAF08EC00BB2721 /* ESArcProgressView.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		DF444D831AAEFF3900BB2721 /* ESArcProgressView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESArcProgressView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +162,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF444D9C1AAEFF3900BB2721 /* Build configuration list for PBXNativeTarget "ESArcProgressViewTests" */;
 			buildPhases = (
+				DF444DA71AAF08E000BB2721 /* CopyFiles */,
 				DF444D8A1AAEFF3900BB2721 /* Sources */,
 				DF444D8B1AAEFF3900BB2721 /* Frameworks */,
 				DF444D8C1AAEFF3900BB2721 /* Resources */,
@@ -336,6 +351,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ESArcProgressView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -351,6 +367,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ESArcProgressView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

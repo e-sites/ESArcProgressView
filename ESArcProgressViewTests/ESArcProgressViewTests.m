@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "ESMultipleArcProgressView.h"
 
 @interface ESArcProgressViewTests : XCTestCase
 
@@ -23,9 +24,29 @@
     [super tearDown];
 }
 
-- (void)test1
+- (void)testImageGeneration
 {
+    CGFloat wh = 200;
+    ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(0, 0, wh, wh)];
+    [pv setProgress:0.5];
+    UIImage *image = [pv es_imageOfView];
+    XCTAssert(image.size.width == wh, @"Width of the image should be %.2f", wh);
+    XCTAssert(image.size.height == wh, @"Height of the image should be %.2f", wh);
+}
+
+- (void)testMultipleViews
+{
+    ESMultipleArcProgressView *mv = [[ESMultipleArcProgressView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     
+    ESArcProgressView *pv = [[ESArcProgressView alloc] init];
+    [pv setProgress:0.5];
+    [mv addArcProgressView:pv];
+    
+    pv = [[ESArcProgressView alloc] init];
+    [pv setProgress:0.5];
+    [mv addArcProgressView:pv];
+    
+    XCTAssert(mv.subviews.count == 2, @"ESMultipleArcProgressView should contain 2 subviews");
 }
 
 @end
