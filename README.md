@@ -72,6 +72,25 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 UIImage *image = [pv generateImage];
 ```
 
+### Animation
+
+```#import <ESArcProgressView.h>
+#include "easing.h"```
+
+```objc
+ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
+[pv setProgress:0];
+[pv setColor:[UIColor orangeColor]];
+[self.view addSubview:pv];
+
+[pv animateTo:0.75 withDuration:1.0f withEasingFunction:BounceEaseOut withUpdateHandler:^(CGFloat animationProgress) {
+	NSLog(@"animation progress: %.2f", animationProgress);
+	if (animationProgress == 1.0f) {
+		NSLog(@"animation finished");
+	}
+}];
+```
+
 ## ESArcProgressView
 
 ### Properties
@@ -103,10 +122,51 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
 
 ### Methods
 
+#### `animateTo:`
+
+Animate to a given value with a duration of 1.0seconds and linear easing
+
+| Property 	| Type  | Description
+|-------	|------ |---------- 
+| `toValue`		| CGFloat | The progress to animate to
+
 ------------
 
-#### `generateImage`
-This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view
+#### `animateTo:withDuration:`
+
+Animate to a given value with a duration of 1.0seconds and linear easing
+
+| Property 	| Type  | Description
+|-------	|------ |---------- 
+| `toValue`		| CGFloat | The progress to animate to
+| `duration`		| NSTimeInterval | The duration of the animation
+
+------------
+
+#### `animateTo:withDuration:withEasingFunction:`
+
+Animate to a given value with a duration of 1.0seconds and linear easing
+
+| Property 	| Type  | Description
+|-------	|------ |---------- 
+| `toValue`		| CGFloat | The progress to animate to
+| `duration`		| NSTimeInterval | The duration of the animation
+| `easingFunction`		| AHEasingFunction | See [AHEAsing](https://github.com/warrenm/AHEasing) for possible values
+
+------------
+
+#### `animateTo:withDuration:withEasingFunction:withUpdateHandler:`
+
+Animate to a given value with a duration of 1.0seconds and linear easing
+
+| Property 	| Type  | Description
+|-------	|------ |---------- 
+| `toValue`		| CGFloat | The progress to animate to
+| `duration`		| NSTimeInterval | The duration of the animation
+| `easingFunction`		| AHEasingFunction | See [AHEAsing](https://github.com/warrenm/AHEasing) for possible values
+| `updateHandler` | void (^)(CGFloat animationProgress) | Update block which is called when the animation progresses
+
+------------
 
 ## ESMultipleArcProgressView
 
@@ -115,7 +175,6 @@ This method generates (and returns) a `UIImage` which is a snapshot of the curre
 | Property 	| Type  | Description  | Default value
 |-------	|------ |----------    | -------
 | `margin`		| CGFloat | The space between the progress views | 1.0
-
 
 ### Methods
 
@@ -139,7 +198,8 @@ Remove a particular `ESArcProgressView` from the view stack. This method will re
 |-------	|------ |----------
 | `progressView`		| ESArcProgressView | The ESArcProgressView to be removed
 
------------
+
+## UIView (ESMultipleArcProgressViewGenerateUIImage)
 
 #### `es_imageOfView`
 This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view with the device's scale as setting

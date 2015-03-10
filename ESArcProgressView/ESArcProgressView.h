@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "easing.h"
+
 @class ESMultipleArcProgressView;
 
 typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
@@ -15,6 +17,8 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
     ESArcProgressCenterDotStyleEnd,
     ESArcProgressCenterDotStyleBeginAndEnd
 };
+
+typedef void (^ESArcProgressViewUpdateBlock)(CGFloat animationProgress);
 
 @interface ESArcProgressView : UIView
 
@@ -154,6 +158,73 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
  */
 
 @property (nonatomic, weak) ESMultipleArcProgressView *multipleArcProgressView;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Animate to a given value with a duration of 1.0seconds and linear easing
+ *
+ *	@param toValue CGFloat (somewhere between 0.0 and 1.0f)
+ *
+ *	@since 1.5
+ *  @date 10/03/2015
+ */
+- (void)animateTo:(CGFloat)toValue;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Animate to a given value with a given duration and a linear easing
+ *
+ *	@param toValue CGFloat (somewhere between 0.0 and 1.0f)
+ *  @param duration NSTimeInterval Duration
+ *
+ *	@since 1.5
+ *  @date 10/03/2015
+ */
+- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Animate to a given value with a duration and custom easing
+ *  @see https://github.com/warrenm/AHEasing for possible easingFunction values
+ *
+ *	@param toValue        CGFloat
+ *	@param duration       NSTimeInterval
+ *	@param easingFunction AHEasingFunction
+ *
+ *	@since 1.5
+ *  @date 10/03/2015
+ */
+- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration withEasingFunction:(AHEasingFunction)easingFunction;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Animate to a given value with a duration and custom easing
+ *  Every time a new progress is done the updateHandler will be called
+ *  @see https://github.com/warrenm/AHEasing for possible easingFunction values
+ *
+ *	@param toValue        CGFloat
+ *	@param duration       NSTimeInterval
+ *	@param easingFunction AHEasingFunction
+ *  @param updateHandler ESArcProgressViewUpdateBlock
+ *
+ *	@since 1.5
+ *  @date 10/03/2015
+ */
+- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration withEasingFunction:(AHEasingFunction)easingFunction withUpdateHandler:(ESArcProgressViewUpdateBlock)updateHandler;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Stops an active animation
+ *
+ *	@since 1.5
+ *  @date 10/03/2015
+ */
+- (void)stopAnimation;
 
 @end
 
