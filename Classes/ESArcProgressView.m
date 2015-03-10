@@ -12,7 +12,7 @@
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
 }
-@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text,showZeroProgress=_showZeroProgress;
+@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text,showZeroProgress=_showZeroProgress,centerDotImage=_centerDotImage,colorizeCenterDotImage=_colorizeCenterDotImage;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -42,6 +42,7 @@
 {
     [self setOpaque:NO];
     _showShadow = YES;
+    _colorizeCenterDotImage = YES;
     _centerDotStyle = ESArcProgressCenterDotStyleBeginAndEnd;
     _lineWidth = 20;
     _color = [UIColor greenColor];
@@ -108,6 +109,18 @@
 - (void)setShowZeroProgress:(BOOL)aShowZeroProgress
 {
     _showZeroProgress = aShowZeroProgress;
+    [self setNeedsDisplay];
+}
+
+- (void)setCenterDotImage:(UIImage *)centerDotImage
+{
+    _centerDotImage = centerDotImage;
+    [self setNeedsDisplay];
+}
+
+- (void)setColorizeCenterDotImage:(BOOL)colorizeCenterDotImage
+{
+    _colorizeCenterDotImage = colorizeCenterDotImage;
     [self setNeedsDisplay];
 }
 
@@ -180,6 +193,7 @@
         CGContextRestoreGState(ctx);
     }
     
+    
     if (self.text.length > 0) {
         NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:self.text];
         [attstr beginEditing];
@@ -205,12 +219,21 @@
         return;
     }
     
-    CGContextSetShadowWithColor(ctx, CGSizeZero, 0, nil);
-    CGContextSetLineWidth(ctx, 0);
-    CGContextSetFillColorWithColor(ctx, self.dotColor.CGColor);
+    UIImage *_image = [self _centerDotColorizedImage];
+    CGSize imageSize = _image.size;
+    if (self.centerDotImage == nil) {
+        CGContextSetFillColorWithColor(ctx, self.dotColor.CGColor);
+    } else {
+        imageSize.height = fminf(imageSize.height, (lineRadius * 2) * 0.7);
+        imageSize.width = fminf(imageSize.width, (lineRadius * 2) * 0.7);
+    }
     
     if ((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd || self.centerDotStyle == ESArcProgressCenterDotStyleBegin) && perc > 0) {
-        CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
+        if (_image != nil) {
+            [_image drawInRect:CGRectMake(center.x - imageSize.width / 2, lineRadius - imageSize.height / 2, imageSize.width, imageSize.height)];
+        } else {
+            CGContextAddEllipseInRect(ctx, CGRectMake(center.x - midDotRadius, center.y - innerRadius - midDotRadius, midDotRadius * 2, midDotRadius * 2));
+        }
     }
     
     if (((self.centerDotStyle == ESArcProgressCenterDotStyleBeginAndEnd && self.progress < 1.0f) || self.centerDotStyle == ESArcProgressCenterDotStyleEnd) && self.progress > 0) {
@@ -218,17 +241,79 @@
         CGFloat h = cosf(delta) * innerRadius;
         CGFloat x = center.x + w;
         CGFloat y = center.y - h;
-        CGContextAddEllipseInRect(ctx, CGRectMake(x - midDotRadius, y - midDotRadius, midDotRadius * 2, midDotRadius * 2));
+        
+        if (_image != nil) {
+            [_image drawInRect:CGRectMake(x - imageSize.width / 2, y - imageSize.height / 2, imageSize.width, imageSize.height)];
+        } else {
+            CGContextAddEllipseInRect(ctx, CGRectMake(x - midDotRadius, y - midDotRadius, midDotRadius * 2, midDotRadius * 2));
+            
+        }
     }
-    CGContextFillPath(ctx);
+    
+    if (self.centerDotImage == nil) {
+        CGContextSetShadowWithColor(ctx, CGSizeZero, 0, nil);
+        CGContextSetLineWidth(ctx, 0);
+        CGContextFillPath(ctx);
+    }
 }
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Creates a colorized UIImage
+ *  Credits to https://github.com/raymondjavaxx/UIImage-RTTint
+ *
+ *	@return UIImage
+ *
+ *	@since 1.3
+ *  @date 10/03/2015
+ */
+- (UIImage *)_centerDotColorizedImage
+{
+    if (self.centerDotImage == nil || !self.colorizeCenterDotImage) {
+        return self.centerDotImage;
+    }
+    CGRect imageRect = CGRectMake(0.0f, 0.0f, self.centerDotImage.size.width, self.centerDotImage.size.height);
+    
+    UIGraphicsBeginImageContextWithOptions(imageRect.size, NO, self.centerDotImage.scale);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    [self.centerDotImage drawInRect:imageRect];
+    
+    CGContextSetFillColorWithColor(ctx, [self.dotColor CGColor]);
+    CGContextSetAlpha(ctx, 1.0f);
+    CGContextSetBlendMode(ctx, kCGBlendModeSourceAtop);
+    CGContextFillRect(ctx, imageRect);
+    
+    CGImageRef imageRef = CGBitmapContextCreateImage(ctx);
+    UIImage *darkImage = [UIImage imageWithCGImage:imageRef
+                                             scale:self.centerDotImage.scale
+                                       orientation:self.centerDotImage.imageOrientation];
+    CGImageRelease(imageRef);
+    
+    UIGraphicsEndImageContext();
+    
+    return darkImage;
+}
+
 @end
 
 @implementation UIView (ESMultipleArcProgressViewGenerateUIImage)
 
 - (UIImage *)generateImage
 {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.0);
+    NSAssert(NO, @"use es_imageOfView instead");
+    return nil;
+}
+
+- (UIImage *)es_imageOfView
+{
+    return [self es_imageOfViewWithScale:0];
+}
+
+- (UIImage *)es_imageOfViewWithScale:(CGFloat)scale
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, scale);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

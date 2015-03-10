@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
  *	@since 1.0
  *  @date 04/03/2015
  */
-@property (nonatomic, readwrite, getter=shouldShowCenterDot) BOOL showCenterDot __deprecated;
+@property (nonatomic, readwrite, getter=shouldShowCenterDot) BOOL showCenterDot __attribute__((deprecated("use centerDotStyle instead")));
 
 /**
  *	@author Bas van Kuijck <bas@e-sites.nl>
@@ -119,6 +119,29 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
  */
 @property (nonatomic, readwrite) ESArcProgressCenterDotStyle centerDotStyle;
 
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	The image to show as a center dot in the arc line
+ *  @note Default = nil
+ *
+ *  @date 10/03/2015
+ *	@since 1.4
+ */
+@property (nonatomic, strong) UIImage *centerDotImage;
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	Should the `centerDotImage` be colorized according to the `dotColor` ?
+ *  @note Default = YES
+ *
+ *	@since 1.4
+ *  @date 10/03/2015
+ */
+@property (nonatomic, readwrite, getter=shouldColorizeCenterDotImage) BOOL colorizeCenterDotImage;
+
 /**
  *	@author Bas van Kuijck <bas@e-sites.nl>
  *
@@ -129,10 +152,13 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
  *	@since 1.0
  *  @date 04/03/2015
  */
+
 @property (nonatomic, weak) ESMultipleArcProgressView *multipleArcProgressView;
 
 @end
 
 @interface UIView (ESMultipleArcProgressViewGenerateUIImage)
-- (UIImage *)generateImage;
+- (UIImage *)generateImage __attribute__((deprecated("use es_imageOfView instead")));
+- (UIImage *)es_imageOfView;
+- (UIImage *)es_imageOfViewWithScale:(CGFloat)scale;
 @end

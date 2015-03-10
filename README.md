@@ -79,6 +79,8 @@ UIImage *image = [pv generateImage];
 | `showZeroProgress`	| BOOL | Should a small line fragment be visible when the progress is 0.0 | NO
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
 | `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
+| `centerDotImage` | UIImage | The 'center dot' is replaced by a custom image | nil
+| `colorizeCenterDotImage` | BOOL | Should `centerDotImage` be colorized with `dotColor` | YES
 | `progress`		| CGFloat | The progress in percentage (from 0.0 - 1.0) | 0.0
 | `text`			| NSString | Show a text label next to the progress view | nil
 | `multipleArcProgressView` | ESMultipleArc-ProgressView | The group view this instance belongs to  | nil
@@ -133,5 +135,8 @@ Remove a particular `ESArcProgressView` from the view stack. This method will re
 
 -----------
 
-#### `generateImage`
-This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view
+#### `es_imageOfView`
+This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view with the device's scale as setting
+
+### `es_imageOfViewWithScale:`
+This method generates (and returns) a `UIImage` which is a snapshot of the current instance's view with a specific scale setting
