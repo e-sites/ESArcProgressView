@@ -1,6 +1,8 @@
 # ESArcProgressView
+[![Build](https://travis-ci.org/e-sites/ESArcProgressView.svg)](https://travis-ci.org/e-sites/ESArcProgressView)
 [![Platform](https://cocoapod-badges.herokuapp.com/p/ESArcProgressView/badge.png)](http://cocoadocs.org/docsets/ESArcProgressView)
 [![Version](https://cocoapod-badges.herokuapp.com/v/ESArcProgressView/badge.png)](http://cocoadocs.org/docsets/ESArcProgressView)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 A progress view to be used within Apple Watch projects
 
@@ -11,7 +13,10 @@ A progress view to be used within Apple Watch projects
 ## Installation
 
 ### Cocoapods
-```pod 'ESArcProgressView', '~> 1.0'```
+```pod 'ESArcProgressView', '~> 1.4'```
+
+### Carthage
+```github "e-sites/ESArcProgressView" ~> 1.4```
 
 ### Manually
 
