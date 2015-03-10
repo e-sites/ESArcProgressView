@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.source_files = "ESArcProgressView/*.{h,m}"
   s.platform     = :ios, '7.0'
   s.frameworks   = 'QuartzCore'
-  s.dependency 'AHEasing', '~> 1.3'
+  s.dependency 'AHEasing', '~> 1.2'
   s.requires_arc = true
 end
