@@ -74,8 +74,8 @@ UIImage *image = [pv generateImage];
 
 ### Animation
 
-```#import <ESArcProgressView.h>
-#include "easing.h"```
+```#import <ESArcProgressView.h>```
+```#include <easing.h>```
 
 ```objc
 ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
