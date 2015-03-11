@@ -1,4 +1,4 @@
 language: objective-c
-xcode_project: ESArcProgressView.xcodeproj
+xcode_workspace: ESArcProgressView.xcworkspace
 xcode_scheme: ESArcProgressView
 xcode_sdk: iphonesimulator8.1

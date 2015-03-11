@@ -1,1 +1,1 @@
-github "warrenm/AHEasing" ~> 1.3
+git "https://github.com/basvankuijck/AHEasing.git" ~> 1.3

@@ -1,0 +1,10 @@
+PODS:
+  - AHEasing (1.2)
+
+DEPENDENCIES:
+  - AHEasing (~> 1.2)
+
+SPEC CHECKSUMS:
+  AHEasing: ecab36683ef8c3a9a925fb85e892d1335e750f31
+
+COCOAPODS: 0.35.0
