@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ESMultipleArcProgressView;
 
 typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
     ESArcProgressCenterDotStyleNone = 0,

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 e-sites. All rights reserved.
 //
 
-#import "ESArcProgressView.h"
+#import "ESArcProgressViewCore.h"
 #include "easing.h"
 
 typedef void (^ESArcProgressViewUpdateBlock)(CGFloat animationProgress);

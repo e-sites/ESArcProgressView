@@ -9,14 +9,10 @@ Pod::Spec.new do |s|
   s.summary      = "A progress view to be used within Apple Watch projects."
   s.source       = { :git => "https://github.com/e-sites/ESArcProgressView.git", :tag => s.version.to_s   }
   s.homepage     = "https://github.com/e-sites/ESArcProgressView"
+  s.source_files = 'ESArcProgressView/ESArcProgressView.h'
   s.public_header_files = 'ESArcProgressView/*.h'
 
-  s.subspec 'Base' do |ss|
-    ss.source_files = 'ESArcProgressView/ESArcProgressView.h'
-  end
-
   s.subspec 'Core' do |ss|
-    ss.dependency 'ESArcProgressView/Base'
     ss.source_files = 'ESArcProgressView/ESArcProgressViewCore.{h,m}'
     s.frameworks   = 'QuartzCore'
   end
