@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESArcProgressView.h"
-
+#import "ESArcProgressViewCore.h"
 
 @interface ESMultipleArcProgressView : UIView
 
@@ -53,5 +52,22 @@
 - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index __attribute__((unavailable("use addArcProgressView: instead")));
 - (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview __attribute__((unavailable("use addArcProgressView: instead")));
 - (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview __attribute__((unavailable("use addArcProgressView: instead")));
+
+@end
+
+@interface ESArcProgressView (Multiple)
+
+/**
+ *	@author Bas van Kuijck <bas@e-sites.nl>
+ *
+ *	A property that points the a `ESMultipleArcProgressView` if used.
+ *  @warning: Do not call this property yourself, `ESMultipleArcProgressView` will do that for you
+ *  @see ESMultipleArcProgressView for more information
+ *
+ *	@since 1.0
+ *  @date 04/03/2015
+ */
+
+@property (nonatomic, weak) ESMultipleArcProgressView *multipleArcProgressView;
 
 @end

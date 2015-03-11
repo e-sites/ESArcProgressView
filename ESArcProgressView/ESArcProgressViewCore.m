@@ -1,23 +1,18 @@
 //
-//  ESArcProgressView.m
+//  ESArcProgressViewCore.m
 //  CircleDraw
 //
 //  Created by Bas van Kuijck on 04-03-15.
 //  Copyright (c) 2015 e-sites. All rights reserved.
 //
 
-#import "ESArcProgressView.h"
-#import "ESMultipleArcProgressView.h"
+#import "ESArcProgressViewCore.h"
 
 
 @implementation ESArcProgressView {
     UIColor *_customBackgroundColor;
-    AHEasingFunction _easingFunction;
-    NSTimer *_animationTimer;
-    NSInteger _animationStep;
-    ESArcProgressViewUpdateBlock _updateBlock;
 }
-@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,multipleArcProgressView,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text,showZeroProgress=_showZeroProgress,centerDotImage=_centerDotImage,colorizeCenterDotImage=_colorizeCenterDotImage;
+@synthesize color=_color,showShadow=_showShadow,showCenterDot,progress=_percentage,lineWidth=_lineWidth,dotColor=_dotColor,centerDotStyle=_centerDotStyle,text=_text,showZeroProgress=_showZeroProgress,centerDotImage=_centerDotImage,colorizeCenterDotImage=_colorizeCenterDotImage;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -127,94 +122,6 @@
 {
     _colorizeCenterDotImage = colorizeCenterDotImage;
     [self setNeedsDisplay];
-}
-
-#pragma mark - Animation
-// ____________________________________________________________________________________________________________________
-
-- (void)animateTo:(CGFloat)toValue
-{
-    [self animateTo:toValue withDuration:1];
-}
-
-#define kFPS 60.0f
-
-- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration
-{
-    [self animateTo:toValue withDuration:1.0f withEasingFunction:LinearInterpolation];
-}
-
-- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration withEasingFunction:(AHEasingFunction)easingFunction
-{
-    [self animateTo:toValue withDuration:duration withEasingFunction:easingFunction withUpdateHandler:nil];
-}
-
-- (void)animateTo:(CGFloat)toValue withDuration:(NSTimeInterval)duration withEasingFunction:(AHEasingFunction)easingFunction withUpdateHandler:(ESArcProgressViewUpdateBlock)updateHandler
-{
-    if (duration == 0) {
-        [self setProgress:toValue];
-        return;
-    }
-    _updateBlock = [updateHandler copy];
-    toValue = fminf(fmaxf(0.0f, toValue), 1.0f);
-    _easingFunction = easingFunction;
-    [_animationTimer invalidate];
-    _animationStep = 0;
-    _animationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f / kFPS target:self selector:@selector(_animationTick:) userInfo:@{
-                                                                                                                                     @"from": @(self.progress),
-                                                                                                                                     @"to": @(toValue),
-                                                                                                                                     @"duration": @(duration)
-                                                                                                                                     } repeats:YES];
-}
-
-- (void)_animationTick:(NSTimer *)timer
-{
-    CGFloat fromValue = [timer.userInfo[@"from"] floatValue];
-    CGFloat toValue = [timer.userInfo[@"to"] floatValue];
-    NSTimeInterval duration = [timer.userInfo[@"duration"] doubleValue];
-    
-    CGFloat percPercStep = (toValue - fromValue) / (duration * kFPS);
-    _animationStep++;
-
-    CGFloat animationPercentage = _animationStep * percPercStep;
-    if (animationPercentage >= 1.0f) {
-        ESArcProgressViewUpdateBlock handler = _updateBlock;
-        [self stopAnimation];
-        if (handler != nil) {
-            handler(animationPercentage);
-            handler = nil;
-        }
-        return;
-    }
-    CGFloat p = _easingFunction(animationPercentage);
-    
-    self.progress = fromValue + ((toValue - fromValue) * p);
-    if (_updateBlock != nil) {
-        _updateBlock(animationPercentage);
-    }
-}
-
-- (void)stopAnimation
-{
-    _updateBlock = nil;
-    if (_animationTimer != nil) {
-        self.progress = [_animationTimer.userInfo[@"to"] floatValue];
-    }
-    [_animationTimer invalidate];
-    _animationTimer = nil;
-}
-
-#pragma mark - UIView
-// ____________________________________________________________________________________________________________________
-
-- (void)removeFromSuperview
-{
-    [self stopAnimation];
-    if (self.multipleArcProgressView == nil) {
-        [super removeFromSuperview];
-    } else {
-        [self.multipleArcProgressView removeArcProgressView:self];
-    }
 }
 
 #pragma mark - Drawing
@@ -375,17 +282,6 @@
     UIGraphicsEndImageContext();
     
     return darkImage;
-}
-
-
-#pragma mark - Destructor
-// ____________________________________________________________________________________________________________________
-
-- (void)dealloc
-{
-    [_animationTimer invalidate];
-    _animationTimer = nil;
-    _updateBlock = nil;
 }
 
 @end

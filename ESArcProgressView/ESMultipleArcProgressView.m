@@ -7,6 +7,7 @@
 //
 
 #import "ESMultipleArcProgressView.h"
+#import <objc/runtime.h>
 
 @implementation ESMultipleArcProgressView {
     ESArcProgressView *_previousArcProgressView;
@@ -134,6 +135,86 @@
 - (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview
 {
     NSAssert(NO, @"%s should not be called", __PRETTY_FUNCTION__);
+}
+
+
+#pragma mark - Destructor
+// ____________________________________________________________________________________________________________________
+
+- (void)dealloc
+{
+    _previousArcProgressView = nil;
+}
+
+@end
+
+@implementation ESArcProgressView (Multiple)
+@dynamic multipleArcProgressView;
+
+static char kMultipleArcProgressViewKey;
+
+#pragma mark - Method swizzling
+// ____________________________________________________________________________________________________________________
+
++ (void)load
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+        
+        SEL originalSelector = @selector(removeFromSuperview);
+        SEL swizzledSelector = @selector(esarc_removeFromSuperview);
+        
+        Method originalMethod = class_getInstanceMethod(class, originalSelector);
+        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+        
+        BOOL didAddMethod = class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+        
+        if (didAddMethod) {
+            class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+        } else {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        }
+    });
+}
+
+#pragma mark - UIView
+// ____________________________________________________________________________________________________________________
+
+- (void)setMultipleArcProgressView:(ESMultipleArcProgressView *)multipleArcProgressView
+{
+    objc_setAssociatedObject(self, &kMultipleArcProgressViewKey, multipleArcProgressView, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (ESMultipleArcProgressView *)multipleArcProgressView
+{
+    return objc_getAssociatedObject(self, &kMultipleArcProgressViewKey);
+}
+
+- (void)esarc_removeFromSuperview
+{
+    SEL sel = NSSelectorFromString(@"stopAnimating");
+    if ([self respondsToSelector:sel]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:sel];
+#pragma clang diagnostic pop
+    }
+    
+    if (self.multipleArcProgressView == nil) {
+        [self esarc_removeFromSuperview];
+    } else {
+        [self.multipleArcProgressView removeArcProgressView:self];
+    }
+}
+
+
+#pragma mark - Destructor
+// ____________________________________________________________________________________________________________________
+
+- (void)dealloc
+{
+    self.multipleArcProgressView = nil;
 }
 
 @end
