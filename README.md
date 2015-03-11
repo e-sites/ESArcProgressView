@@ -2,6 +2,7 @@
 [![Build](https://travis-ci.org/e-sites/ESArcProgressView.svg)](https://travis-ci.org/e-sites/ESArcProgressView)
 [![Platform](https://cocoapod-badges.herokuapp.com/p/ESArcProgressView/badge.png)](http://cocoadocs.org/docsets/ESArcProgressView)
 [![Version](https://cocoapod-badges.herokuapp.com/v/ESArcProgressView/badge.png)](http://cocoadocs.org/docsets/ESArcProgressView)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 A progress view to be used within Apple Watch projects
 
@@ -28,19 +29,19 @@ These classes have the following dependecies:
 ```objc
 ESMultipleArcProgressView *v = [[ESMultipleArcProgressView alloc] initWithFrame:CGRectMake(40, 40, 200, 200)];
 [self.view addSubview:v];
-    
+
 ESArcProgressView *pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.5];
 [pv setText:@"RUN"];
 [pv setColor:[UIColor orangeColor]];
 [v addArcProgressView:pv];
-    
+
 pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.65];
 [pv setText:@"WALK"];
 [pv setColor:[UIColor greenColor]];
 [v addArcProgressView:pv];
-    
+
 pv = [[ESArcProgressView alloc] init];
 [pv setProgress:0.8];
 [pv setText:@"REST"];
@@ -94,10 +95,10 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 
 | Property 	| Type  | Description  | Default value
 |-------	|------ |----------    | -------
-| `color`		| UIColor | The color of the line | Green     
+| `color`		| UIColor | The color of the line | Green
 | `backgroundColor`	| UIColor | The background color of the line | Default = 50% transparent of color
-| `dotColor	`	| UIColor | The color of the center dot at the beginning / end of the line | White    
-| `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20       
+| `dotColor	`	| UIColor | The color of the center dot at the beginning / end of the line | White
+| `lineWidth`		| CGFloat | The line width (aka diameter) of the line | 20
 | `showZeroProgress`	| BOOL | Should a small line fragment be visible when the progress is 0.0 | NO
 | `showShadow`	| BOOL | Should the line have a drop shadow | YES
 | `centerDotStyle`	| ESArcProgress-CenterDotStyle | Center dot style placement | ESArcProgress-CenterDotStyle-BeginAndEnd
@@ -124,7 +125,7 @@ typedef NS_ENUM(NSInteger, ESArcProgressCenterDotStyle) {
 Animate to a given value with a duration of 1.0seconds and linear easing
 
 | Property 	| Type  | Description
-|-------	|------ |---------- 
+|-------	|------ |----------
 | `toValue`		| CGFloat | The progress to animate to
 
 ------------
@@ -134,7 +135,7 @@ Animate to a given value with a duration of 1.0seconds and linear easing
 Animate to a given value with a duration of 1.0seconds and linear easing
 
 | Property 	| Type  | Description
-|-------	|------ |---------- 
+|-------	|------ |----------
 | `toValue`		| CGFloat | The progress to animate to
 | `duration`		| NSTimeInterval | The duration of the animation
 
@@ -145,7 +146,7 @@ Animate to a given value with a duration of 1.0seconds and linear easing
 Animate to a given value with a duration of 1.0seconds and linear easing
 
 | Property 	| Type  | Description
-|-------	|------ |---------- 
+|-------	|------ |----------
 | `toValue`		| CGFloat | The progress to animate to
 | `duration`		| NSTimeInterval | The duration of the animation
 | `easingFunction`		| AHEasingFunction | See [AHEAsing](https://github.com/warrenm/AHEasing) for possible values
@@ -157,7 +158,7 @@ Animate to a given value with a duration of 1.0seconds and linear easing
 Animate to a given value with a duration of 1.0seconds and linear easing
 
 | Property 	| Type  | Description
-|-------	|------ |---------- 
+|-------	|------ |----------
 | `toValue`		| CGFloat | The progress to animate to
 | `duration`		| NSTimeInterval | The duration of the animation
 | `easingFunction`		| AHEasingFunction | See [AHEAsing](https://github.com/warrenm/AHEasing) for possible values

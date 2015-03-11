@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "ESMultipleArcProgressView.h"
+#import <ESArcProgressView.h>
 
 @interface ESArcProgressViewTests : XCTestCase
 

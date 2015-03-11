@@ -12,16 +12,6 @@
 		DF444D8F1AAEFF3900BB2721 /* ESArcProgressView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF444D831AAEFF3900BB2721 /* ESArcProgressView.framework */; };
 		DF444D961AAEFF3900BB2721 /* ESArcProgressViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF444D951AAEFF3900BB2721 /* ESArcProgressViewTests.m */; };
 		DF444DA81AAF08EC00BB2721 /* ESArcProgressView.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF444D831AAEFF3900BB2721 /* ESArcProgressView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DFB8B46C1AB03152007AF34C /* ESArcProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = DFB8B4651AB03152007AF34C /* ESArcProgressView.h */; };
-		DFB8B46D1AB03152007AF34C /* ESArcProgressView+Animations.h in Headers */ = {isa = PBXBuildFile; fileRef = DFB8B4661AB03152007AF34C /* ESArcProgressView+Animations.h */; };
-		DFB8B46E1AB03152007AF34C /* ESArcProgressView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B4671AB03152007AF34C /* ESArcProgressView+Animations.m */; };
-		DFB8B46F1AB03152007AF34C /* ESArcProgressView+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B4671AB03152007AF34C /* ESArcProgressView+Animations.m */; };
-		DFB8B4701AB03152007AF34C /* ESArcProgressViewCore.h in Headers */ = {isa = PBXBuildFile; fileRef = DFB8B4681AB03152007AF34C /* ESArcProgressViewCore.h */; };
-		DFB8B4711AB03152007AF34C /* ESArcProgressViewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B4691AB03152007AF34C /* ESArcProgressViewCore.m */; };
-		DFB8B4721AB03152007AF34C /* ESArcProgressViewCore.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B4691AB03152007AF34C /* ESArcProgressViewCore.m */; };
-		DFB8B4731AB03152007AF34C /* ESMultipleArcProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = DFB8B46A1AB03152007AF34C /* ESMultipleArcProgressView.h */; };
-		DFB8B4741AB03152007AF34C /* ESMultipleArcProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B46B1AB03152007AF34C /* ESMultipleArcProgressView.m */; };
-		DFB8B4751AB03152007AF34C /* ESMultipleArcProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB8B46B1AB03152007AF34C /* ESMultipleArcProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,20 +39,10 @@
 
 /* Begin PBXFileReference section */
 		042DF40E919431602EC55A40 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		753CBACD5C2FD85A2F5306DD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		CA5AD180E87F4025080C9721 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DF444D831AAEFF3900BB2721 /* ESArcProgressView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESArcProgressView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF444D871AAEFF3900BB2721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF444D8E1AAEFF3900BB2721 /* ESArcProgressViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESArcProgressViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF444D941AAEFF3900BB2721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF444D951AAEFF3900BB2721 /* ESArcProgressViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESArcProgressViewTests.m; sourceTree = "<group>"; };
-		DFB8B4651AB03152007AF34C /* ESArcProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESArcProgressView.h; sourceTree = "<group>"; };
-		DFB8B4661AB03152007AF34C /* ESArcProgressView+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ESArcProgressView+Animations.h"; sourceTree = "<group>"; };
-		DFB8B4671AB03152007AF34C /* ESArcProgressView+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ESArcProgressView+Animations.m"; sourceTree = "<group>"; };
-		DFB8B4681AB03152007AF34C /* ESArcProgressViewCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESArcProgressViewCore.h; sourceTree = "<group>"; };
-		DFB8B4691AB03152007AF34C /* ESArcProgressViewCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESArcProgressViewCore.m; sourceTree = "<group>"; };
-		DFB8B46A1AB03152007AF34C /* ESMultipleArcProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESMultipleArcProgressView.h; sourceTree = "<group>"; };
-		DFB8B46B1AB03152007AF34C /* ESMultipleArcProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESMultipleArcProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,15 +66,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1FDBB5A4F7B388780C36D37B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				753CBACD5C2FD85A2F5306DD /* Pods.debug.xcconfig */,
-				CA5AD180E87F4025080C9721 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		B560E6B336A3E32A316E8DFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,10 +77,8 @@
 		DF444D791AAEFF3900BB2721 = {
 			isa = PBXGroup;
 			children = (
-				DF444D851AAEFF3900BB2721 /* ESArcProgressView */,
 				DF444D921AAEFF3900BB2721 /* ESArcProgressViewTests */,
 				DF444D841AAEFF3900BB2721 /* Products */,
-				1FDBB5A4F7B388780C36D37B /* Pods */,
 				B560E6B336A3E32A316E8DFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -121,29 +90,6 @@
 				DF444D8E1AAEFF3900BB2721 /* ESArcProgressViewTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DF444D851AAEFF3900BB2721 /* ESArcProgressView */ = {
-			isa = PBXGroup;
-			children = (
-				DFB8B4651AB03152007AF34C /* ESArcProgressView.h */,
-				DFB8B4661AB03152007AF34C /* ESArcProgressView+Animations.h */,
-				DFB8B4671AB03152007AF34C /* ESArcProgressView+Animations.m */,
-				DFB8B4681AB03152007AF34C /* ESArcProgressViewCore.h */,
-				DFB8B4691AB03152007AF34C /* ESArcProgressViewCore.m */,
-				DFB8B46A1AB03152007AF34C /* ESMultipleArcProgressView.h */,
-				DFB8B46B1AB03152007AF34C /* ESMultipleArcProgressView.m */,
-				DF444D861AAEFF3900BB2721 /* Supporting Files */,
-			);
-			path = ESArcProgressView;
-			sourceTree = "<group>";
-		};
-		DF444D861AAEFF3900BB2721 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DF444D871AAEFF3900BB2721 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DF444D921AAEFF3900BB2721 /* ESArcProgressViewTests */ = {
@@ -170,10 +116,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFB8B46D1AB03152007AF34C /* ESArcProgressView+Animations.h in Headers */,
-				DFB8B4701AB03152007AF34C /* ESArcProgressViewCore.h in Headers */,
-				DFB8B46C1AB03152007AF34C /* ESArcProgressView.h in Headers */,
-				DFB8B4731AB03152007AF34C /* ESMultipleArcProgressView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,9 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFB8B46E1AB03152007AF34C /* ESArcProgressView+Animations.m in Sources */,
-				DFB8B4711AB03152007AF34C /* ESArcProgressViewCore.m in Sources */,
-				DFB8B4741AB03152007AF34C /* ESMultipleArcProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,10 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFB8B4751AB03152007AF34C /* ESMultipleArcProgressView.m in Sources */,
 				DF444D961AAEFF3900BB2721 /* ESArcProgressViewTests.m in Sources */,
-				DFB8B4721AB03152007AF34C /* ESArcProgressViewCore.m in Sources */,
-				DFB8B46F1AB03152007AF34C /* ESArcProgressView+Animations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +391,6 @@
 		};
 		DF444D9A1AAEFF3900BB2721 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 753CBACD5C2FD85A2F5306DD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -471,7 +406,6 @@
 		};
 		DF444D9B1AAEFF3900BB2721 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA5AD180E87F4025080C9721 /* Pods.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -487,7 +421,6 @@
 		};
 		DF444D9D1AAEFF3900BB2721 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 753CBACD5C2FD85A2F5306DD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -505,7 +438,6 @@
 		};
 		DF444D9E1AAEFF3900BB2721 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA5AD180E87F4025080C9721 /* Pods.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
