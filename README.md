@@ -50,7 +50,7 @@ pv = [[ESArcProgressView alloc] init];
 
 ```objc
 // To extract the UIImage:
-UIImage *image = [v generateImage];
+UIImage *image = [v es_imageOfView];
 ```
 
 ### ESArcProgressView
@@ -65,7 +65,7 @@ ESArcProgressView *pv = [[ESArcProgressView alloc] initWithFrame:CGRectMake(20, 
 
 ```objc
 // To extract the UIImage:
-UIImage *image = [pv generateImage];
+UIImage *image = [pv es_imageOfView];
 ```
 
 ### Animation
