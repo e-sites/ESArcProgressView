@@ -65,7 +65,10 @@ static char kUpdateHandlerKey;
     CGFloat toValue = [timer.userInfo[@"to"] floatValue];
     NSTimeInterval duration = [timer.userInfo[@"duration"] doubleValue];
 
-    CGFloat percPercStep = (toValue - fromValue) / (duration * kFPS);
+    CGFloat percPercStep;
+    if (toValue >= fromValue) { percPercStep = toValue - fromValue; }
+    else { percPercStep = fromValue - toValue; }
+    percPercStep /= (duration * kFPS);
     NSInteger animationStep = [objc_getAssociatedObject(self, &kAnimationStepKey) integerValue];
     animationStep++;
     objc_setAssociatedObject(self, &kAnimationStepKey, @(animationStep), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
