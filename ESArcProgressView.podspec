@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ESArcProgressView"
-  s.version      = "1.6"
+  s.version      = "1.6.1"
   s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.author       = { "bvkuijck" => "Bas van Kuijck <bas@e-sites.nl>" }
