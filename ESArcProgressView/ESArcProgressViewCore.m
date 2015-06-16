@@ -156,6 +156,7 @@
     CGPathAddRelativeArc(path, NULL, center.x, center.y, innerRadius, -(M_PI / 2), M_PI * 2);
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
+    CGPathRelease(path);
     if (perc > 0) {
         
         CGContextSaveGState(ctx);
@@ -166,6 +167,7 @@
         CGContextAddPath(ctx, path);
         CGContextClosePath(ctx);
         CGContextEOClip(ctx);
+        CGPathRelease(path);
         
         // Shadow
         if (self.shouldShowShadow) {
@@ -179,6 +181,7 @@
         CGContextAddPath(ctx, path);
         CGContextStrokePath(ctx);
         CGContextRestoreGState(ctx);
+        CGPathRelease(path);
     }
     
     
