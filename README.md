@@ -12,7 +12,7 @@ A progress view to be used within Apple Watch projects
 
 ## Installation
 
-### Cocoapods
+### CocoaPods
 ```pod 'ESArcProgressView', '~> 1.4'```
 
 ### Manually
